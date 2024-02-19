@@ -12,7 +12,8 @@ h6 {
   font-weight: 600;
 }
 
-p {
+p,
+label {
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
 }
