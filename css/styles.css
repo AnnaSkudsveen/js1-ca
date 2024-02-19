@@ -2,3 +2,7 @@
   height: auto;
   width: 200px;
 }
+
+input[type="checkbox"] {
+  margin: 0 24px 0 0;
+}
