@@ -1,4 +1,5 @@
 const movieDetailDiv = document.querySelector(".movie-detail-div");
+const selectedMovie = JSON.parse(localStorage.getItem("movie"));
 
 function displayMovies(movie) {
   const movieDiv = document.createElement("div");
@@ -8,7 +9,7 @@ function displayMovies(movie) {
     <h3>${movie.title}</h3>
     <p class="movie-description">${movie.description}</p>
     <h4><span class="old-price">${movie.price}</span><span class="discounted-price">${movie.discountedPrice}</span> per month</h4>
-    <button class="see-more-btn">See more</button>
+    <button class="add-to-cart-btn">Add to cart</button>
     `;
   } else {
     movieDiv.innerHTML += `
@@ -16,13 +17,11 @@ function displayMovies(movie) {
     <h3>${movie.title}</h3>
     <p class="movie-description">${movie.description}</p>
     <h4 class="price">${movie.price} per month</h4>
-    <button class="see-more-btn">See more</button>
+    <button class="add-to-cart-btn">Add to cart</button>
     `;
   }
   movieDetailDiv.appendChild(movieDiv);
 }
-
-localStorage.getItem("movie", JSON.parse());
 
 let movieData = [];
 
@@ -32,4 +31,6 @@ fetch("https://api.noroff.dev/api/v1/square-eyes")
   })
   .then((result) => {
     movieData = result;
+
+    displayMovies(selectedMovie);
   });
