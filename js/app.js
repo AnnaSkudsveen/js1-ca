@@ -5,8 +5,6 @@ const selectMenu = document.getElementById("select-menu");
 const filterBtn = document.getElementById("filter-btn");
 const seeMoreBtn = document.getElementsByClassName("see-more-btn");
 
-console.log(seeMoreBtn);
-
 let movieData = [];
 
 fetch("https://api.noroff.dev/api/v1/square-eyes")
@@ -21,6 +19,7 @@ fetch("https://api.noroff.dev/api/v1/square-eyes")
 
     for (const movie of movieData) {
       displayMovies(movie);
+
       //genre filtering
       const movieGenre = movie.genre;
       genres.push(movieGenre);
@@ -32,10 +31,17 @@ fetch("https://api.noroff.dev/api/v1/square-eyes")
       genresIntoDropdown(uniqeGenres[i]);
     }
 
+    for (let i = 0; i < seeMoreBtn.length; i++) {
+      const movie = movieData[i];
+      seeMoreBtn[i].addEventListener("click", () => {
+        localStorage.setItem("movie", JSON.stringify(movie));
+        window.location.href = "http://127.0.0.1:5501/html/details.html";
+      });
+    }
+
     filterBtn.addEventListener("click", () => {
       event.preventDefault();
       filterByGenre(selectMenu.value);
-      console.log(selectMenu.value);
     });
   });
 
@@ -72,7 +78,7 @@ function displayMovies(movie) {
     movieDiv.innerHTML += `
   <img src="${movie.image}" alt="picture of movie cover" class="movie-poster">
   <h3>${movie.title}</h3>
-  <p class="movie-description">${movie.description}</p>
+  
   <h4><span class="old-price">${movie.price}</span><span class="discounted-price">${movie.discountedPrice}</span> per month</h4>
   <button class="see-more-btn">See more</button>
   `;
@@ -80,7 +86,7 @@ function displayMovies(movie) {
     movieDiv.innerHTML += `
   <img src="${movie.image}" alt="picture of movie cover" class="movie-poster">
   <h3>${movie.title}</h3>
-  <p class="movie-description">${movie.description}</p>
+  
   <h4 class="price">${movie.price} per month</h4>
   <button class="see-more-btn">See more</button>
   `;
@@ -109,10 +115,24 @@ function filterByGenre(genreToFilterBy) {
   if (selectMenu.value === "all") {
     for (const movie of movieData) {
       displayMovies(movie);
+      for (let i = 0; i < seeMoreBtn.length; i++) {
+        const movieLink = movieData[i];
+        seeMoreBtn[i].addEventListener("click", () => {
+          localStorage.setItem("movie", JSON.stringify(movieLink));
+          window.location.href = "http://127.0.0.1:5501/html/details.html";
+        });
+      }
     }
   } else {
     for (const movie of filteredResult) {
       displayMovies(movie);
+      for (let i = 0; i < seeMoreBtn.length; i++) {
+        const movieLink = movieData[i];
+        seeMoreBtn[i].addEventListener("click", () => {
+          localStorage.setItem("movie", JSON.stringify(movieLink));
+          window.location.href = "http://127.0.0.1:5501/html/details.html";
+        });
+      }
     }
   }
 }
