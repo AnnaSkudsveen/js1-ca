@@ -1,5 +1,6 @@
 const movieDetailDiv = document.querySelector(".movie-detail-div");
 const selectedMovie = JSON.parse(localStorage.getItem("movie"));
+const loadingBar = document.getElementById("loading-bar");
 
 let itemsInCart = JSON.parse(localStorage.getItem("moviesInCart")) || [];
 
@@ -27,12 +28,23 @@ function displayMovies(movie) {
   const addToCartBtn = document.querySelector(".add-to-cart-btn");
 
   addToCartBtn.addEventListener("click", () => {
-    storeItemInLocalStorage(movie);
-    movieDiv.innerHTML += `
-    <p>${movie.title} was added to your cart</p>
-    `;
+   const duplicates = itemsInCart.filter((item, index) => itemsInCart.indexOf(item)!== index)
+
+  
+      if () {
+        throw window.alert("This movie is already in your cart");
+      } else {
+        storeItemInLocalStorage(movie);
+        movieDiv.innerHTML += `
+        <p>${movie.title} was added to your cart</p>
+        `;
+      }
 
     //ADD AN ERROR HANDLING FOR DUPLICATE OBJECTS
+
+    //check if item is in array using filter()
+    //if it is = throw error
+    //If it isnt = storeItemInLocalStorage + change innerHTML
   });
 }
 
@@ -43,12 +55,19 @@ function storeItemInLocalStorage(item) {
 
 let movieData = [];
 
-fetch("https://api.noroff.dev/api/v1/square-eyes")
-  .then((response) => {
-    return response.json();
-  })
-  .then((result) => {
-    movieData = result;
+try {
+  fetch("https://api.noroff.dev/api/v1/square-eyes")
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      movieData = result;
 
-    displayMovies(selectedMovie);
-  });
+      displayMovies(selectedMovie);
+
+      loadingBar.style.display = "none";
+    });
+} catch (error) {
+  console.log(error);
+  alert(error);
+}

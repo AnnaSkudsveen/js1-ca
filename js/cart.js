@@ -1,5 +1,9 @@
 const movieListDiv = document.querySelector(".movie-list");
 const itemsInCart = JSON.parse(localStorage.getItem("moviesInCart"));
+const payBtn = document.querySelector(".pay-btn");
+const loadingBar = document.getElementById("loading-bar");
+
+console.log(payBtn);
 
 function displayMovies(movie) {
   const movieDiv = document.createElement("div");
@@ -20,13 +24,11 @@ function displayMovies(movie) {
   }
   movieListDiv.appendChild(movieDiv);
 
-  const removeFromCartBtn = document.querySelector(".remove-from-cart-btn");
+  const removeFromCartBtn = movieDiv.querySelector(".remove-from-cart-btn");
 
   removeFromCartBtn.addEventListener("click", () => {
-    const removeIndex = itemsInCart.indexOf(movie);
-    console.log(removeIndex);
     removeItemInLocalStorage(movie);
-    movieDiv.innerHTML += `
+    movieDiv.innerHTML = `
     <p>${movie.title} was removed from your cart</p>
     `;
 
@@ -35,20 +37,29 @@ function displayMovies(movie) {
 }
 
 function removeItemInLocalStorage(item) {
-  itemsInCart.pop(item);
-  localStorage.setItem("moviesInCart", JSON.stringify(itemsInCart));
+  const removeIndex = itemsInCart.indexOf(item);
+  if (removeIndex !== -1) {
+    itemsInCart.splice(removeIndex, 1);
+    localStorage.setItem("moviesInCart", JSON.stringify(itemsInCart));
+  }
 }
 
 let movieData = [];
+try {
+  fetch("https://api.noroff.dev/api/v1/square-eyes")
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      movieData = result;
 
-fetch("https://api.noroff.dev/api/v1/square-eyes")
-  .then((response) => {
-    return response.json();
-  })
-  .then((result) => {
-    movieData = result;
+      for (const movie of itemsInCart) {
+        displayMovies(movie);
+      }
 
-    for (const movie of itemsInCart) {
-      displayMovies(movie);
-    }
-  });
+      loadingBar.style.display = "none";
+    });
+} catch (error) {
+  console.log(error);
+  alert(error);
+}

@@ -4,46 +4,56 @@ const filterDiv = document.querySelector(".filter");
 const selectMenu = document.getElementById("select-menu");
 const filterBtn = document.getElementById("filter-btn");
 const seeMoreBtn = document.getElementsByClassName("see-more-btn");
+const loadingBar = document.getElementById("loading-bar");
 
 let movieData = [];
 
-fetch("https://api.noroff.dev/api/v1/square-eyes")
-  .then((response) => {
-    return response.json();
-  })
-  .then((result) => {
-    movieData = result;
+let itemsInCart = JSON.parse(localStorage.getItem("moviesInCart")) || [];
 
-    const genres = [];
-    let filteredResult = [];
+try {
+  fetch("https://api.noroff.dev/api/v1/square-eyes")
+    .then((response) => {
+      return response.json();
+    })
+    .then((result) => {
+      movieData = result;
 
-    for (const movie of movieData) {
-      displayMovies(movie);
+      const genres = [];
+      let filteredResult = [];
 
-      //genre filtering
-      const movieGenre = movie.genre;
-      genres.push(movieGenre);
-    }
-    //get only uniqe genres into a separate array
-    const uniqeGenres = [...new Set(genres)];
+      for (const movie of movieData) {
+        displayMovies(movie);
 
-    for (let i = 0; i < uniqeGenres.length; i++) {
-      genresIntoDropdown(uniqeGenres[i]);
-    }
+        //genre filtering
+        const movieGenre = movie.genre;
+        genres.push(movieGenre);
+      }
+      //get only uniqe genres into a separate array
+      const uniqeGenres = [...new Set(genres)];
 
-    for (let i = 0; i < seeMoreBtn.length; i++) {
-      const movie = movieData[i];
-      seeMoreBtn[i].addEventListener("click", () => {
-        localStorage.setItem("movie", JSON.stringify(movie));
-        window.location.href = "http://127.0.0.1:5501/html/details.html";
+      for (let i = 0; i < uniqeGenres.length; i++) {
+        genresIntoDropdown(uniqeGenres[i]);
+      }
+
+      for (let i = 0; i < seeMoreBtn.length; i++) {
+        const movie = movieData[i];
+        seeMoreBtn[i].addEventListener("click", () => {
+          localStorage.setItem("movie", JSON.stringify(movie));
+          window.location.href = "http://127.0.0.1:5501/html/details.html";
+        });
+      }
+
+      filterBtn.addEventListener("click", () => {
+        event.preventDefault();
+        filterByGenre(selectMenu.value);
       });
-    }
 
-    filterBtn.addEventListener("click", () => {
-      event.preventDefault();
-      filterByGenre(selectMenu.value);
+      loadingBar.style.display = "none";
     });
-  });
+} catch (error) {
+  console.log(error);
+  alert(error);
+}
 
 // let filteredResult = movieData.filter((movie) => movie.genre === "action");
 
@@ -53,20 +63,34 @@ function displayMovies(movie) {
     movieDiv.innerHTML += `
   <img src="${movie.image}" alt="picture of movie cover" class="movie-poster">
   <h3>${movie.title}</h3>
-  
   <h4><span class="old-price">${movie.price}</span><span class="discounted-price">${movie.discountedPrice}</span> per month</h4>
   <button class="see-more-btn">See more</button>
+  <button class="add-to-cart-btn">Add to cart</button>
   `;
   } else {
     movieDiv.innerHTML += `
   <img src="${movie.image}" alt="picture of movie cover" class="movie-poster">
   <h3>${movie.title}</h3>
-  
   <h4 class="price">${movie.price} per month</h4>
   <button class="see-more-btn">See more</button>
+  <button class="add-to-cart-btn">Add to cart</button>
   `;
   }
   movieListDiv.appendChild(movieDiv);
+
+  const addToCartBtn = movieDiv.querySelector(".add-to-cart-btn");
+
+  addToCartBtn.addEventListener("click", () => {
+    storeItemInLocalStorage(movie);
+    movieDiv.innerHTML += `
+    <p>${movie.title} was added to your cart</p>
+    `;
+  });
+}
+
+function storeItemInLocalStorage(item) {
+  itemsInCart.push(item);
+  localStorage.setItem("moviesInCart", JSON.stringify(itemsInCart));
 }
 
 function genresIntoDropdown(genre) {
@@ -150,4 +174,3 @@ function filterByGenre(genreToFilterBy) {
 //     console.log(error);
 //     console.error("error fetching data: ", error);
 //   }
-// }
