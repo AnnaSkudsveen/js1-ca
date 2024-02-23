@@ -5,6 +5,7 @@ const homepageLink = document.getElementById("homepage-link");
 
 function displayMovies(movie) {
   const movieDiv = document.createElement("div");
+  movieDiv.classList = "movieDiv";
   if (movie.onSale) {
     movieDiv.innerHTML += `
       <img src="${movie.image}" alt="picture of movie cover" class="movie-poster">
@@ -37,6 +38,5 @@ try {
       }
     });
 } catch (error) {
-  console.log(error);
   alert(error);
 }

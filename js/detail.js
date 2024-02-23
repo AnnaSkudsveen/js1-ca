@@ -6,21 +6,26 @@ let itemsInCart = JSON.parse(localStorage.getItem("moviesInCart")) || [];
 
 function displayMovies(movie) {
   const movieDiv = document.createElement("div");
+  movieDiv.classList = "movieDiv";
   if (movie.onSale) {
     movieDiv.innerHTML += `
-    <img src="${movie.image}" alt="picture of movie cover" class="movie-poster">
+    <img src="${movie.image}" alt="picture of movie cover" class="movie-poster-detail">
+    <div class="movie-information">
     <h3>${movie.title}</h3>
     <p class="movie-description">${movie.description}</p>
-    <h4><span class="old-price">${movie.price}</span><span class="discounted-price">${movie.discountedPrice}</span> per month</h4>
+    <h4><span class="old-price">${movie.price},-</span>Sale:<span class="discounted-price"> ${movie.discountedPrice}</span>,-</h4>
     <button class="add-to-cart-btn">Add to cart</button>
+    </div>
     `;
   } else {
     movieDiv.innerHTML += `
-    <img src="${movie.image}" alt="picture of movie cover" class="movie-poster">
+    <img src="${movie.image}" alt="picture of movie cover" class="movie-poster-detail">
+    <div class="movie-information">
     <h3>${movie.title}</h3>
     <p class="movie-description">${movie.description}</p>
-    <h4 class="price">${movie.price} per month</h4>
+    <h4 class="price">${movie.price},-</h4>
     <button class="add-to-cart-btn">Add to cart</button>
+    </div>
     `;
   }
   movieDetailDiv.appendChild(movieDiv);
@@ -28,23 +33,16 @@ function displayMovies(movie) {
   const addToCartBtn = document.querySelector(".add-to-cart-btn");
 
   addToCartBtn.addEventListener("click", () => {
-   const duplicates = itemsInCart.filter((item, index) => itemsInCart.indexOf(item)!== index)
+    const duplicates = itemsInCart.filter((item) => item.title === movie.title);
 
-  
-      if () {
-        throw window.alert("This movie is already in your cart");
-      } else {
-        storeItemInLocalStorage(movie);
-        movieDiv.innerHTML += `
-        <p>${movie.title} was added to your cart</p>
-        `;
-      }
-
-    //ADD AN ERROR HANDLING FOR DUPLICATE OBJECTS
-
-    //check if item is in array using filter()
-    //if it is = throw error
-    //If it isnt = storeItemInLocalStorage + change innerHTML
+    if (duplicates.length > 0) {
+      alert("This movie is already in your cart");
+    } else {
+      storeItemInLocalStorage(movie);
+      movieDiv.innerHTML += `
+      <p>${movie.title} was added to your cart</p>
+      `;
+    }
   });
 }
 
@@ -68,6 +66,5 @@ try {
       loadingBar.style.display = "none";
     });
 } catch (error) {
-  console.log(error);
   alert(error);
 }

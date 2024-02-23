@@ -1,0 +1,76 @@
+nav {
+  background-color: var(--background-color);
+  color: var(--whiteish);
+  display: flex;
+  justify-content: center;
+}
+
+.square-eyes-logo {
+  height: 50px;
+  width: auto;
+  margin-top: 5px;
+  align-self: center;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#homepage-link {
+  color: var(--background-color);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.popcorn-div {
+  display: flex;
+  justify-content: center;
+}
+
+.popcorn-img {
+  height: 350px;
+}
+
+.order-text {
+  max-width: 1660px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 40px;
+  max-width: 1660px;
+  align-self: center;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.movieDiv {
+  height: 340px;
+  display: flex;
+  max-width: 240px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.movie-poster {
+  height: 300px;
+  width: auto;
+}
+
+.movie-poster-detail {
+  width: 300px;
+  height: auto;
+  align-self: center;
+}

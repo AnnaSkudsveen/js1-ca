@@ -10,6 +10,7 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap"
         rel="stylesheet">
     <title>Square Eyes</title>
+    <script src="https://kit.fontawesome.com/5ba45fa1e0.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/root.css">
     <script src="js/app.js" defer></script>
@@ -18,26 +19,22 @@
 <body>
     <header>
         <nav>
-            <div>
-                <ul>
-                    <li><a href="/index.html">All movies</a></li>
-                </ul>
-            </div>
-            <div>
-                <a href="/index.html">
-                    <img src="" alt="">
-                </a>
-            </div>
-            <div>
-                <ul>
-                    <!-- <li><a href="">
-                            icon Profile
-                        </a></li> -->
-                    <li><a href="/html/cart.html">
-                            icon Cart
-                        </a></li>
-                </ul>
-            </div>
+            <ul class="nav-ul">
+                <li>
+                    <a href="/index.html">All movies</a>
+                </li>
+                <li>
+                    <a href="/index.html">
+                        <img src="/assets/square-eyes-logo.svg" alt="" class="square-eyes-logo">
+                    </a>
+                </li>
+                <li>
+                    <a href="/html/cart.html" class="cart-link">
+                        <i id="cart-icon" class="fa-solid fa-cart-shopping"></i>
+                        Cart
+                    </a>
+                </li>
+            </ul>
         </nav>
     </header>
 
@@ -47,6 +44,7 @@
             <h1>title</h1>
         </section> -->
         <h2 id="loading-bar">Loading...</h2>
+        <h2 id="movies-header">Movies</h2>
         <div class="filter">
             <form action="">
                 <select name="" id="select-menu">
@@ -56,8 +54,9 @@
                 <button id="filter-btn">Filter</button>
             </form>
         </div>
+
         <section class="movie-list">
-            <h2>Movies</h2>
+
         </section>
     </main>
 </body>

@@ -1,6 +1,5 @@
 const movieListDiv = document.querySelector(".movie-list");
 const filterDiv = document.querySelector(".filter");
-// const checkboxDiv = document.querySelector(".form-checkboxes");
 const selectMenu = document.getElementById("select-menu");
 const filterBtn = document.getElementById("filter-btn");
 const seeMoreBtn = document.getElementsByClassName("see-more-btn");
@@ -51,7 +50,6 @@ try {
       loadingBar.style.display = "none";
     });
 } catch (error) {
-  console.log(error);
   alert(error);
 }
 
@@ -59,21 +57,26 @@ try {
 
 function displayMovies(movie) {
   const movieDiv = document.createElement("div");
+  movieDiv.classList = "movieDiv";
   if (movie.onSale) {
     movieDiv.innerHTML += `
   <img src="${movie.image}" alt="picture of movie cover" class="movie-poster">
   <h3>${movie.title}</h3>
-  <h4><span class="old-price">${movie.price}</span><span class="discounted-price">${movie.discountedPrice}</span> per month</h4>
+  <h4><span class="old-price">${movie.price}</span>Sale:<span class="discounted-price">${movie.discountedPrice}</span>,-</h4>
+  <div class="buttons">
   <button class="see-more-btn">See more</button>
   <button class="add-to-cart-btn">Add to cart</button>
+  </div>
   `;
   } else {
     movieDiv.innerHTML += `
   <img src="${movie.image}" alt="picture of movie cover" class="movie-poster">
   <h3>${movie.title}</h3>
-  <h4 class="price">${movie.price} per month</h4>
+  <h4 class="price">${movie.price},-</h4>
+  <div class="buttons">
   <button class="see-more-btn">See more</button>
   <button class="add-to-cart-btn">Add to cart</button>
+  </div>
   `;
   }
   movieListDiv.appendChild(movieDiv);
@@ -81,10 +84,16 @@ function displayMovies(movie) {
   const addToCartBtn = movieDiv.querySelector(".add-to-cart-btn");
 
   addToCartBtn.addEventListener("click", () => {
-    storeItemInLocalStorage(movie);
-    movieDiv.innerHTML += `
-    <p>${movie.title} was added to your cart</p>
-    `;
+    const duplicates = itemsInCart.filter((item) => item.title === movie.title);
+
+    if (duplicates.length > 0) {
+      alert("This movie is already in your cart");
+    } else {
+      storeItemInLocalStorage(movie);
+      movieDiv.innerHTML += `
+      <p>${movie.title} was added to your cart</p>
+      `;
+    }
   });
 }
 
@@ -108,7 +117,6 @@ function filterByGenre(genreToFilterBy) {
     }
   }
 
-  console.log(filteredResult);
   movieListDiv.innerHTML = "";
 
   if (selectMenu.value === "all") {
@@ -137,40 +145,10 @@ function filterByGenre(genreToFilterBy) {
   }
 }
 
-// function genreIntoCheckbox(genre) {
-//   checkboxDiv.innerHTML += `
-//   <label for="${genre}">${genre}</label>
-//     <input type="checkbox" name="${genre}" id="${genre}" value="${genre}">
-//     `;
-// }
-
 //I used v1, not v2 of the API as it was most similar to the one we used in class
 //I created a fetch request for v2 as well, but I found v1 to be easier to understand
 // fetchMovies("https://api.noroff.dev/api/v1/square-eyes");
 
-//The Async fetch request. It works, but I struggled a bit with getting filtering to work,
+//I startet with the async request, but I found it a bit troubling. It worked,
+//but I struggled a bit with getting filtering to work,
 //so I decied to try fetch.then and that worked better for me.
-
-// async function fetchMovies(url) {
-//   try {
-//     const response = await fetch(url);
-//     movieData = await response.json();
-
-//     const genres = [];
-
-//     //genre filtering
-//     for (const movie of movieData) {
-//       displayMovies(movie);
-//       const movieGenre = movie.genre;
-//       genres.push(movieGenre);
-//     }
-
-//     const uniqeGenres = [...new Set(genres)];
-
-//     for (let i = 0; i < uniqeGenres.length; i++) {
-//       genresIntoDropdown(uniqeGenres[i]);
-//     }
-//   } catch (error) {
-//     console.log(error);
-//     console.error("error fetching data: ", error);
-//   }
