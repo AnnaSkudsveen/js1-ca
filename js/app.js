@@ -45,31 +45,6 @@ fetch("https://api.noroff.dev/api/v1/square-eyes")
     });
   });
 
-// async function fetchMovies(url) {
-//   try {
-//     const response = await fetch(url);
-//     movieData = await response.json();
-
-//     const genres = [];
-
-//     //genre filtering
-//     for (const movie of movieData) {
-//       displayMovies(movie);
-//       const movieGenre = movie.genre;
-//       genres.push(movieGenre);
-//     }
-
-//     const uniqeGenres = [...new Set(genres)];
-
-//     for (let i = 0; i < uniqeGenres.length; i++) {
-//       genresIntoDropdown(uniqeGenres[i]);
-//     }
-//   } catch (error) {
-//     console.log(error);
-//     console.error("error fetching data: ", error);
-//   }
-// }
-
 // let filteredResult = movieData.filter((movie) => movie.genre === "action");
 
 function displayMovies(movie) {
@@ -115,6 +90,7 @@ function filterByGenre(genreToFilterBy) {
   if (selectMenu.value === "all") {
     for (const movie of movieData) {
       displayMovies(movie);
+
       for (let i = 0; i < seeMoreBtn.length; i++) {
         const movieLink = movieData[i];
         seeMoreBtn[i].addEventListener("click", () => {
@@ -127,7 +103,7 @@ function filterByGenre(genreToFilterBy) {
     for (const movie of filteredResult) {
       displayMovies(movie);
       for (let i = 0; i < seeMoreBtn.length; i++) {
-        const movieLink = movieData[i];
+        const movieLink = filteredResult[i];
         seeMoreBtn[i].addEventListener("click", () => {
           localStorage.setItem("movie", JSON.stringify(movieLink));
           window.location.href = "http://127.0.0.1:5501/html/details.html";
@@ -147,3 +123,31 @@ function filterByGenre(genreToFilterBy) {
 //I used v1, not v2 of the API as it was most similar to the one we used in class
 //I created a fetch request for v2 as well, but I found v1 to be easier to understand
 // fetchMovies("https://api.noroff.dev/api/v1/square-eyes");
+
+//The Async fetch request. It works, but I struggled a bit with getting filtering to work,
+//so I decied to try fetch.then and that worked better for me.
+
+// async function fetchMovies(url) {
+//   try {
+//     const response = await fetch(url);
+//     movieData = await response.json();
+
+//     const genres = [];
+
+//     //genre filtering
+//     for (const movie of movieData) {
+//       displayMovies(movie);
+//       const movieGenre = movie.genre;
+//       genres.push(movieGenre);
+//     }
+
+//     const uniqeGenres = [...new Set(genres)];
+
+//     for (let i = 0; i < uniqeGenres.length; i++) {
+//       genresIntoDropdown(uniqeGenres[i]);
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     console.error("error fetching data: ", error);
+//   }
+// }

@@ -1,6 +1,8 @@
 const movieDetailDiv = document.querySelector(".movie-detail-div");
 const selectedMovie = JSON.parse(localStorage.getItem("movie"));
 
+let itemsInCart = JSON.parse(localStorage.getItem("moviesInCart")) || [];
+
 function displayMovies(movie) {
   const movieDiv = document.createElement("div");
   if (movie.onSale) {
@@ -21,6 +23,22 @@ function displayMovies(movie) {
     `;
   }
   movieDetailDiv.appendChild(movieDiv);
+
+  const addToCartBtn = document.querySelector(".add-to-cart-btn");
+
+  addToCartBtn.addEventListener("click", () => {
+    storeItemInLocalStorage(movie);
+    movieDiv.innerHTML += `
+    <p>${movie.title} was added to your cart</p>
+    `;
+
+    //ADD AN ERROR HANDLING FOR DUPLICATE OBJECTS
+  });
+}
+
+function storeItemInLocalStorage(item) {
+  itemsInCart.push(item);
+  localStorage.setItem("moviesInCart", JSON.stringify(itemsInCart));
 }
 
 let movieData = [];
