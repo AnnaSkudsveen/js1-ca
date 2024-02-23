@@ -1,0 +1,115 @@
+nav {
+  background-color: var(--background-color);
+  color: var(--whiteish);
+  /* display: flex;
+    justify-content: space-between; */
+  /* padding: 0 20px; */
+  /* position: sticky;
+    top: 10px; */
+}
+
+.square-eyes-logo {
+  height: 50px;
+  width: auto;
+  margin-top: 5px;
+  align-self: center;
+}
+
+a {
+  color: var(--whiteish);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nav-ul {
+  list-style: none;
+  padding: 0 35px;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  height: 40px;
+  width: 100px;
+  border-radius: 16px;
+  border: none;
+  color: var(--whiteish);
+  background-color: var(--dark-blue);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 40px;
+  max-width: 1660px;
+  align-self: center;
+  justify-content: space-around;
+  gap: 20px;
+} */
+
+.movie-detail-div {
+  align-self: center;
+  display: flex;
+  /* align-items: center; */
+}
+
+.movie-detail-div image {
+  height: auto;
+}
+
+.movieDiv {
+  /* height: px; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px;
+  gap: 20px;
+}
+
+.movie-poster {
+  height: 300px;
+  width: auto;
+}
+
+.movie-poster-detail {
+  width: 300px;
+  height: auto;
+  align-self: center;
+}
+
+.movie-information {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 16px;
+  max-width: 500px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.old-price {
+  text-decoration: line-through;
+  margin-right: 16px;
+}
+
+.discounted-price {
+  color: var(--blue);
+}

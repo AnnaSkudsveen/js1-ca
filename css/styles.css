@@ -1,0 +1,118 @@
+nav {
+  background-color: var(--background-color);
+  color: var(--whiteish);
+}
+
+.square-eyes-logo {
+  height: 50px;
+  width: auto;
+  margin-top: 5px;
+  align-self: center;
+}
+
+a {
+  color: var(--whiteish);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nav-ul {
+  list-style: none;
+  padding: 0 35px;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#movies-header {
+  margin: 20px auto;
+}
+
+form {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+select {
+  height: 40px;
+  border-radius: 16px;
+  width: 170px;
+}
+
+button {
+  height: 40px;
+  padding: 0 16px;
+  width: auto;
+  border-radius: 16px;
+  border: none;
+  color: var(--whiteish);
+  background-color: var(--dark-blue);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 40px;
+  max-width: 1660px;
+  align-self: center;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.movieDiv {
+  height: 460px;
+  display: flex;
+  max-width: 240px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.movie-poster {
+  height: 300px;
+  width: auto;
+}
+
+.movie-poster-detail {
+  width: 300px;
+  height: auto;
+  align-self: center;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+input[type="checkbox"] {
+  margin: 0 24px 0 0;
+}
+
+.old-price {
+  text-decoration: line-through;
+  margin-right: 16px;
+}
+
+.discounted-price {
+  color: var(--blue);
+}
+
+.total-div {
+  display: flex;
+  justify-content: center;
+}

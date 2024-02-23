@@ -1,0 +1,36 @@
+:root {
+  --background-color: #050517;
+  --dark-blue: #363b63;
+  --blue: #2660a4;
+  --mid-blue: #91c4f2;
+  --light-blue: #d5e6f6;
+  --whiteish: #d9d9d9;
+}
+
+body {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Oswald", sans-serif;
+  font-weight: 600;
+  margin: 0;
+}
+
+p,
+label,
+select,
+a,
+button {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+}
+
+* {
+  box-sizing: border-box;
+}
