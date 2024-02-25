@@ -1,11 +1,6 @@
 nav {
   background-color: var(--background-color);
   color: var(--whiteish);
-  /* display: flex;
-    justify-content: space-between; */
-  /* padding: 0 20px; */
-  /* position: sticky;
-    top: 10px; */
 }
 
 .square-eyes-logo {
@@ -51,20 +46,9 @@ main {
   flex-direction: column;
 }
 
-/* .movie-list {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 40px;
-  max-width: 1660px;
-  align-self: center;
-  justify-content: space-around;
-  gap: 20px;
-} */
-
 .movie-detail-div {
   align-self: center;
   display: flex;
-  /* align-items: center; */
 }
 
 .movie-detail-div image {
@@ -72,7 +56,6 @@ main {
 }
 
 .movieDiv {
-  /* height: px; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;

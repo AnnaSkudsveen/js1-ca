@@ -34,6 +34,12 @@ try {
         genresIntoDropdown(uniqeGenres[i]);
       }
 
+      filterBtn.addEventListener("click", () => {
+        event.preventDefault();
+        filterByGenre(selectMenu.value);
+      });
+
+      //Add a see more button to each movie, and link it to its detail page
       for (let i = 0; i < seeMoreBtn.length; i++) {
         const movie = movieData[i];
         seeMoreBtn[i].addEventListener("click", () => {
@@ -42,18 +48,11 @@ try {
         });
       }
 
-      filterBtn.addEventListener("click", () => {
-        event.preventDefault();
-        filterByGenre(selectMenu.value);
-      });
-
       loadingBar.style.display = "none";
     });
 } catch (error) {
   alert(error);
 }
-
-// let filteredResult = movieData.filter((movie) => movie.genre === "action");
 
 function displayMovies(movie) {
   const movieDiv = document.createElement("div");
@@ -62,7 +61,7 @@ function displayMovies(movie) {
     movieDiv.innerHTML += `
   <img src="${movie.image}" alt="picture of movie cover" class="movie-poster">
   <h3>${movie.title}</h3>
-  <h4><span class="old-price">${movie.price}</span>Sale:<span class="discounted-price">${movie.discountedPrice}</span>,-</h4>
+  <h4><span class="old-price">${movie.price}</span>Sale: <span class="discounted-price">${movie.discountedPrice}</span>,-</h4>
   <div class="buttons">
   <button class="see-more-btn">See more</button>
   <button class="add-to-cart-btn">Add to cart</button>
@@ -147,7 +146,6 @@ function filterByGenre(genreToFilterBy) {
 
 //I used v1, not v2 of the API as it was most similar to the one we used in class
 //I created a fetch request for v2 as well, but I found v1 to be easier to understand
-// fetchMovies("https://api.noroff.dev/api/v1/square-eyes");
 
 //I startet with the async request, but I found it a bit troubling. It worked,
 //but I struggled a bit with getting filtering to work,
