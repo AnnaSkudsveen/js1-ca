@@ -1,7 +1,8 @@
 const movieListDiv = document.querySelector(".movie-list");
 const itemsInCart = JSON.parse(localStorage.getItem("moviesInCart"));
 const payBtn = document.querySelector(".pay-btn");
-const homepageLink = document.getElementById("homepage-link");
+const homepageLinkText = document.getElementById("homepage-link-text");
+const navImgBtn = document.querySelector(".nav-image-div");
 
 function displayMovies(movie) {
   const movieDiv = document.createElement("div");
@@ -21,7 +22,11 @@ function displayMovies(movie) {
 }
 
 let movieData = [];
-homepageLink.addEventListener("click", () => {
+homepageLinkText.addEventListener("click", () => {
+  localStorage.clear();
+});
+
+navImgBtn.addEventListener("click", () => {
   localStorage.clear();
 });
 

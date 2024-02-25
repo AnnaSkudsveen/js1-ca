@@ -34,6 +34,11 @@ try {
         genresIntoDropdown(uniqeGenres[i]);
       }
 
+      filterBtn.addEventListener("click", () => {
+        event.preventDefault();
+        filterByGenre(selectMenu.value);
+      });
+
       for (let i = 0; i < seeMoreBtn.length; i++) {
         const movie = movieData[i];
         seeMoreBtn[i].addEventListener("click", () => {
@@ -41,11 +46,6 @@ try {
           window.location.href = "http://127.0.0.1:5501/html/details.html";
         });
       }
-
-      filterBtn.addEventListener("click", () => {
-        event.preventDefault();
-        filterByGenre(selectMenu.value);
-      });
 
       loadingBar.style.display = "none";
     });
@@ -62,7 +62,7 @@ function displayMovies(movie) {
     movieDiv.innerHTML += `
   <img src="${movie.image}" alt="picture of movie cover" class="movie-poster">
   <h3>${movie.title}</h3>
-  <h4><span class="old-price">${movie.price}</span>Sale:<span class="discounted-price">${movie.discountedPrice}</span>,-</h4>
+  <h4><span class="old-price">${movie.price}</span>Sale: <span class="discounted-price">${movie.discountedPrice}</span>,-</h4>
   <div class="buttons">
   <button class="see-more-btn">See more</button>
   <button class="add-to-cart-btn">Add to cart</button>

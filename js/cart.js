@@ -51,13 +51,17 @@ try {
     .then((result) => {
       movieData = result;
 
-      for (const movie of itemsInCart) {
-        displayMovies(movie);
+      if (itemsInCart) {
+        for (const movie of itemsInCart) {
+          displayMovies(movie);
+        }
+
+        sumOfAll();
+
+        loadingBar.style.display = "none";
+      } else {
+        loadingBar.innerText = "Your cart is empty";
       }
-
-      sumOfAll();
-
-      loadingBar.style.display = "none";
     });
 } catch (error) {
   alert(error);
