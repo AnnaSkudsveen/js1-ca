@@ -39,6 +39,7 @@ try {
         filterByGenre(selectMenu.value);
       });
 
+      //Add a see more button to each movie, and link it to its detail page
       for (let i = 0; i < seeMoreBtn.length; i++) {
         const movie = movieData[i];
         seeMoreBtn[i].addEventListener("click", () => {
@@ -52,8 +53,6 @@ try {
 } catch (error) {
   alert(error);
 }
-
-// let filteredResult = movieData.filter((movie) => movie.genre === "action");
 
 function displayMovies(movie) {
   const movieDiv = document.createElement("div");
@@ -147,7 +146,6 @@ function filterByGenre(genreToFilterBy) {
 
 //I used v1, not v2 of the API as it was most similar to the one we used in class
 //I created a fetch request for v2 as well, but I found v1 to be easier to understand
-// fetchMovies("https://api.noroff.dev/api/v1/square-eyes");
 
 //I startet with the async request, but I found it a bit troubling. It worked,
 //but I struggled a bit with getting filtering to work,
