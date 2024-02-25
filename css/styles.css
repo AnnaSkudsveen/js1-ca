@@ -32,6 +32,11 @@ a {
   justify-content: center;
 }
 
+.cart-header {
+  padding-top: 20px;
+  margin: auto;
+}
+
 #movies-header {
   margin: 20px auto;
 }
