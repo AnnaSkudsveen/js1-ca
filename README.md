@@ -9,9 +9,9 @@ There is a filtering function that filters the movies genres nd display the movi
 This application uses localStorage to save information.
 
 ### Technologies
-JavaScript
-HTML
-CSS
+JavaScript  
+HTML  
+CSS  
 
 ### License
 This project is licensed under the MIT License - see the LICENSE.md file for details
