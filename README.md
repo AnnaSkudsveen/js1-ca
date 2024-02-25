@@ -1,6 +1,6 @@
 # JavaScript 1 Course Assignment
 ## Square Eyes
-![screenshot-homepage]()
+![screenshot-homepage](assets/application-homepage.png)
 
 ### Description
 This course assignment takes a movie api and displays the movies on a home page, you can add items to cart, remove them from your cart and there is a checkout success page.
